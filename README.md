@@ -104,7 +104,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 ## 4. 簡短報告 (方法、分析、問題與解決)
 
-根據 `results_200M/` 目錄中的模擬結果，我們比較了 MLOP 預取器與無預取器（基線）配置在 `602.gcc_s-2226B.champsimtrace.xz` 追蹤檔上的效能。
+根據 `results_200M/` 目錄中的模擬結果，我們比較了 MLOP 預取器與無預取器（baseline）配置在 `602.gcc_s-2226B.champsimtrace.xz` 追蹤檔上的效能。
 
 ### 4.1 數據呈現
 
