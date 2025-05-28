@@ -54,7 +54,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 例如，參考比賽規則，使用 `602.gcc_s-2226B.champsimtrace.xz` 追蹤檔，預熱 50M 指令，模擬 200M 指令：
 
 ```bash
-./run_champsim.sh bin/perceptron-mlop_dpc3-next_line-next_line-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
+./run_champsim.sh perceptron-mlop_dpc3-next_line-next_line-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
 ```
 
 結果儲存於 `results_200M/`，檔名格式如 `[trace_file]-[config].txt` (例如 `602.gcc_s-2226B.champsimtrace.xz-perceptron-mlop_dpc3-next_line-next_line-lru-1core.txt`)。
@@ -73,7 +73,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 2. **執行**：
    ```bash
-   ./run_champsim.sh bin/perceptron-mlop_dpc3-next_line-next_line-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
+   ./run_champsim.sh perceptron-mlop_dpc3-next_line-next_line-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
    ```
    預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-mlop_dpc3-next_line-next_line-lru-1core.txt`
 
@@ -87,7 +87,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 2. **執行**：
    ```bash
-   ./run_champsim.sh bin/perceptron-no-no-no-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
+   ./run_champsim.sh perceptron-no-no-no-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
    ```
    預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-no-no-no-lru-1core.txt`
 
