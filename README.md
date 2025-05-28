@@ -6,10 +6,10 @@
 
 MLOP (Multi-Lookahead Offset Prefetcher) 是一款旨在同時提升預取「及時性」(timeliness) 與「覆蓋率」(coverage) 的硬體預取器。其核心思想包括：
 
-*   **多重前瞻等級**：評估預取偏移量 (offset) 時，考量不同預測「距離」的效益。
-*   **存取映射表 (AMT)**：追蹤近期記憶體存取及其鄰近區塊的狀態。
-*   **偏移量評分與選擇**：為各前瞻等級的潛在偏移量評分，選取最高分者。
-*   **請求優先級**：優先處理較小前瞻等級（預期較快發生）的預取請求。
+* **多重前瞻等級**：評估預取偏移量 (offset) 時，考量不同預測「距離」的效益。
+* **存取映射表 (AMT)**：追蹤近期記憶體存取及其鄰近區塊的狀態。
+* **偏移量評分與選擇**：為各前瞻等級的潛在偏移量評分，選取最高分者。
+* **請求優先級**：優先處理較小前瞻等級（預期較快發生）的預取請求。
 
 MLOP 旨在克服傳統偏移預取器在及時性與覆蓋率上的取捨難題，主要於 L1 資料快取 (L1D Cache) 運作，並根據 L1D 未命中串流 (miss streams) 進行訓練。
 
@@ -59,40 +59,40 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 ### 3.1 執行 MLOP 配置
 
-1.  **編譯**：
-    ```bash
-    ./build_champsim.sh perceptron mlop_dpc3 next_line next_line lru 1
-    ```
-    執行檔：`bin/perceptron-mlop_dpc3-next_line-next_line-lru-1core`
+1. **編譯**：
+   ```bash
+   ./build_champsim.sh perceptron mlop_dpc3 next_line next_line lru 1
+   ```
+   執行檔：`bin/perceptron-mlop_dpc3-next_line-next_line-lru-1core`
 
-2.  **執行**：
-    ```bash
-    ./run_champsim.sh bin/perceptron-mlop_dpc3-next_line-next_line-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
-    ```
-    預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-mlop_dpc3-next_line-next_line-lru-1core.txt`
+2. **執行**：
+   ```bash
+   ./run_champsim.sh bin/perceptron-mlop_dpc3-next_line-next_line-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
+   ```
+   預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-mlop_dpc3-next_line-next_line-lru-1core.txt`
 
 ### 3.2 執行基準配置 (無預取器)
 
-1.  **編譯**：
-    ```bash
-    ./build_champsim.sh perceptron no no no lru 1
-    ```
-    執行檔：`bin/perceptron-no-no-no-lru-1core`
+1. **編譯**：
+   ```bash
+   ./build_champsim.sh perceptron no no no lru 1
+   ```
+   執行檔：`bin/perceptron-no-no-no-lru-1core`
 
-2.  **執行**：
-    ```bash
-    ./run_champsim.sh bin/perceptron-no-no-no-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
-    ```
-    預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-no-no-no-lru-1core.txt`
+2. **執行**：
+   ```bash
+   ./run_champsim.sh bin/perceptron-no-no-no-lru-1core 50 200 dpc3_traces/602.gcc_s-2226B.champsimtrace.xz
+   ```
+   預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-no-no-no-lru-1core.txt`
 
 ### 3.3 結果驗證
 
 比較 MLOP 與基準配置的結果檔，重點觀察：
 
-*   **IPC (Instructions Per Cycle)**：越高越好。
-*   **L1D MPKI (Misses Per Kilo Instructions for L1 Data Cache)**：越低越好。
-*   **L1D Prefetch Accuracy** (預取準確度)：預取命中 / (預取命中 + 預取未命中)。越高越好。
-*   **L1D Prefetch Coverage** (預取覆蓋率)：(原始未命中但被預取命中的數量) / (原始未命中總數)。越高越好。
+* **IPC (Instructions Per Cycle)**：越高越好。
+* **L1D MPKI (Misses Per Kilo Instructions for L1 Data Cache)**：越低越好。
+* **L1D Prefetch Accuracy** (預取準確度)：預取命中 / (預取命中 + 預取未命中)。越高越好。
+* **L1D Prefetch Coverage** (預取覆蓋率)：(原始未命中但被預取命中的數量) / (原始未命中總數)。越高越好。
 
 詳細指標名稱請見 ChampSim 輸出。
 
@@ -104,12 +104,12 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 關鍵效能指標整理如下表：
 
-| 指標 (Metric)                                     | 無預取器 (No Prefetcher) | MLOP 預取器 (MLOP Prefetcher) | 變化幅度 (Change)      |
+| 指標 (Metric)                                      | 無預取器 (No Prefetcher)  | MLOP 預取器 (MLOP Prefetcher)  | 變化幅度 (Change)       |
 | :------------------------------------------------ | :----------------------- | :---------------------------- | :--------------------- |
 | IPC (Instructions Per Cycle)                      | 0.122                    | 0.449                         | 約 +267.0%             |
-| L1D MPKI (每千條指令L1D需求未命中數)              | 72.39                    | 18.48                         | 約 -74.5% (越低越好)   |
-| L1D 預取準確度 (Prefetch Accuracy)                | N/A                      | 69.00%                        | N/A                    |
-| L1D 預取覆蓋率 (Prefetch Coverage)                | N/A                      | 98.56%                        | N/A                    |
+| L1D MPKI (每千條指令L1D需求未命中數)                  | 72.39                    | 18.48                         | 約 -74.5% (越低越好)   |
+| L1D 預取準確度 (Prefetch Accuracy)                  | N/A                      | 69.00%                        | N/A                    |
+| L1D 預取覆蓋率 (Prefetch Coverage)                  | N/A                      | 98.56%                        | N/A                    |
 
 *註：L1D MPKI 基於 L1D 的需求未命中（Load + RFO misses）計算，計算公式為 (L1D 總需求未命中數 / 總指令數) * 1000。預取覆蓋率計算方式為：(MLOP 配置下的 L1D 有用預取數) / (無預取器配置下的 L1D 總需求未命中數)。*
 
@@ -118,8 +118,8 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 * **IPC 改進**：MLOP 預取器使 `602.gcc_s` 追蹤的 IPC 從約 0.122 顯著提升至約 0.449，增幅高達約 267.0%。這表明 MLOP 能有效地減少處理器等待記憶體存取的時間，從而大幅提高執行效率。
 * **L1D 快取未命中率降低**：MLOP 將 L1D MPKI 從約 72.39 大幅降低至約 18.48，降幅約為 74.5%。這意味著 MLOP 成功地將大量原本會導致 L1D 快取未命中的數據提前載入到 L1D 快取中。
 * **預取準確度與覆蓋率**：
-    * MLOP 的預取準確度為 69.00%，代表其發出的預取請求中有超過三分之二的數據是有效的。這有助於減少不必要的記憶體頻寬消耗和快取污染，儘管仍有提升空間。
-    * 預取覆蓋率達到了驚人的 98.56%，這表示 MLOP 幾乎能夠捕捉到所有潛在的 L1D 需求未命中，並透過預取來滿足它們。高覆蓋率是實現顯著效能提升的關鍵因素。
+  * MLOP 的預取準確度為 69.00%，代表其發出的預取請求中有超過三分之二的數據是有效的。這有助於減少不必要的記憶體頻寬消耗和快取污染，儘管仍有提升空間。
+  * 預取覆蓋率達到了驚人的 98.56%，這表示 MLOP 幾乎能夠捕捉到所有潛在的 L1D 需求未命中，並透過預取來滿足它們。高覆蓋率是實現顯著效能提升的關鍵因素。
 
 ### 4.3 與論文比較
 
