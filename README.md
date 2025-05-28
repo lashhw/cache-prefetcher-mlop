@@ -57,7 +57,13 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 此節說明如何用 `602.gcc_s-2226B.champsimtrace.xz` 追蹤檔 (trace file) 重現 MLOP 預取器的模擬結果，並與無預取器的基準配置比較。
 
-### 3.1 執行 MLOP 配置
+### 3.1 下載追蹤檔
+
+在執行模擬之前，請先下載指定的追蹤檔（trace file）。請至 https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/ 下載 `602.gcc_s-2226B.champsimtrace.xz` 檔案。
+
+將下載的追蹤檔存放於 `dpc3_traces/` 目錄下，確保與 `run_champsim.sh` 腳本中預設的追蹤檔路徑一致。
+
+### 3.2 執行 MLOP 配置
 
 1. **編譯**：
    ```bash
@@ -71,7 +77,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
    ```
    預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-mlop_dpc3-next_line-next_line-lru-1core.txt`
 
-### 3.2 執行基準配置 (無預取器)
+### 3.3 執行基準配置 (無預取器)
 
 1. **編譯**：
    ```bash
@@ -85,7 +91,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
    ```
    預期結果檔：`results_200M/602.gcc_s-2226B.champsimtrace.xz-perceptron-no-no-no-lru-1core.txt`
 
-### 3.3 結果驗證
+### 3.4 結果驗證
 
 比較 MLOP 與基準配置的結果檔，重點觀察：
 
