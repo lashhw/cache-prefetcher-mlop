@@ -1,4 +1,4 @@
-# MLOP 預取器研究與 ChampSim 結果重現指南
+# MLOP 預取器研究與 ChampSim 結果重現說明
 
 ## 1. 簡介與執行環境
 
