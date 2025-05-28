@@ -59,7 +59,7 @@ MLOP 實作位於 `prefetcher/mlop_dpc3.l1d_pref`。
 
 ### 3.1 下載追蹤檔
 
-在執行模擬之前，請先下載指定的追蹤檔（trace file）。請至 https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/ 下載 `602.gcc_s-2226B.champsimtrace.xz` 檔案。
+在執行模擬之前，請先下載指定的追蹤檔。請至 https://dpc3.compas.cs.stonybrook.edu/champsim-traces/speccpu/ 下載 `602.gcc_s-2226B.champsimtrace.xz` 檔案。
 
 將下載的追蹤檔存放於 `dpc3_traces/` 目錄下，確保與 `run_champsim.sh` 腳本中預設的追蹤檔路徑一致。
 
